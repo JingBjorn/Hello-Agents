@@ -1,1 +1,33 @@
+# 敏感配置
 .env
+.env.*
+!.env.sample
+!.env.example
+
+# Python 缓存
+__pycache__/
+*.py[cod]
+
+# 虚拟环境
+.venv/
+venv/
+
+# 构建产物
+build/
+dist/
+*.egg-info/
+
+# 测试、检查工具缓存
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+.coverage.*
+htmlcov/
+
+# 日志
+*.log
+
+# 系统文件
+.DS_Store
+Thumbs.db
