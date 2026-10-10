@@ -33,7 +33,7 @@ class HelloAgentsLLM:
             # 同时接受根地址和以 /v1 结尾的地址，避免重复拼接。
             if self.base_url.endswith("/v1"):
                 self.base_url = self.base_url[:-3]
-            self.max_output_tokens = int(os.getenv("LOCAL_RUNTIME_MAX_OUTPUT_TOKENS", "2048"))
+            self.max_output_tokens = int(os.getenv("LOCAL_RUNTIME_MAX_OUTPUT_TOKENS", "32768"))
             if self.max_output_tokens <= 0:
                 raise ValueError("LOCAL_RUNTIME_MAX_OUTPUT_TOKENS 必须为正整数。")
             # 本地 Runtime 负责认证，不向它发送其他供应商的 API Key。
@@ -125,20 +125,20 @@ class HelloAgentsLLM:
             print(f"❌ 调用LLM API时发生错误: {e}")
             return None
     
-# --- 客户端使用示例 ---
-if __name__ == '__main__':
-    try:
-        llmClient = HelloAgentsLLM()
+# # --- 客户端使用示例 ---
+# if __name__ == '__main__':
+#     try:
+#         llmClient = HelloAgentsLLM()
 
-        exampleMessages = [
-            {"role": "system", "content": "You are a helpful assistant that writes Python code."},
-            {"role": "user", "content": "写一个快速排序算法"}
-        ]
+#         exampleMessages = [
+#             {"role": "system", "content": "You are a helpful assistant that writes Python code."},
+#             {"role": "user", "content": "写一个快速排序算法"}
+#         ]
 
-        print("--- 调用LLM ---")
-        responseText = llmClient.think(exampleMessages)
-        if responseText:
-            print("\n\n--- 完整模型响应 ---")
-            print(responseText)
-    except ValueError as e:
-        print(f"❌ 错误: {e}")
+#         print("--- 调用LLM ---")
+#         responseText = llmClient.think(exampleMessages)
+#         if responseText:
+#             print("\n\n--- 完整模型响应 ---")
+#             print(responseText)
+#     except ValueError as e:
+#         print(f"❌ 错误: {e}")
