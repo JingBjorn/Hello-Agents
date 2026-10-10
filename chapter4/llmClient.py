@@ -39,7 +39,7 @@ class HelloAgentsLLM:
             # 本地 Runtime 负责认证，不向它发送其他供应商的 API Key。
             self.client = None
         else:
-            self.model = model or os.getenv("MODEL_NAME")
+            self.model = model or os.getenv("OPENAI_MODEL_NAME")
             apiKey = apiKey or os.getenv("OPENAI_API_KEY")
             baseUrl = baseUrl or os.getenv("OPENAI_BASE_URL")
 

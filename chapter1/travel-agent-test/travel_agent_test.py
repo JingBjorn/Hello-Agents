@@ -12,7 +12,7 @@ load_dotenv(Path(__file__).resolve().parent / "../../.env")
 # 请根据您使用的服务，将这里替换成对应的凭证和地址
 API_KEY = os.getenv("OPENAI_API_KEY")
 BASE_URL = os.getenv("OPENAI_BASE_URL")
-MODEL_ID = os.getenv("MODEL_NAME")
+MODEL_ID = os.getenv("OPENAI_MODEL_NAME")
 TAVILY_API_KEY=os.getenv("TAVILY_API_KEY")
 
 llm = OpenAICompatibleClient(
