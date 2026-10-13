@@ -37,22 +37,42 @@ USER_TASK = """我们需要开发一个比特币价格显示应用，具体要�
 
 def create_openai_model_client(*, base_url=None, api_key=None, timeout=None):
     """创建并配置 OpenAI 模型客户端"""
+    # return OpenAIChatCompletionClient(
+    #     model=os.getenv("OPENAI_MODEL_NAME", "gpt-4o"),
+    #     api_key=api_key or os.getenv("OPENAI_API_KEY"),
+    #     base_url=base_url or os.getenv("OPENAI_BASE_URL", "https://api.openai.com/v1"),
+    #     model_info={
+    #         "vision": False,
+    #         "function_calling": False,
+    #         "json_output": False,
+    #         "family": "unknown",
+    #         "structured_output": False,
+    #     },
+    #     # Responses 不接收 Chat Completions 的 name 字段，用文本前缀保留角色。
+    #     include_name_in_message=False,
+    #     add_name_prefixes=True,
+    #     timeout=timeout if timeout is not None else float(os.getenv("AUTOGEN_PROXY_TIMEOUT", "180")) + 15,
+    #     max_retries=0,
+    # )
+
     return OpenAIChatCompletionClient(
-        model=os.getenv("OPENAI_MODEL_NAME", "gpt-4o"),
-        api_key=api_key or os.getenv("OPENAI_API_KEY"),
-        base_url=base_url or os.getenv("OPENAI_BASE_URL", "https://api.openai.com/v1"),
+        model=os.getenv("LLM_MODEL_NAME", "gpt-4o"),
+        api_key=api_key or os.getenv("LLM_API_KEY"),
+        base_url=base_url or os.getenv("LLM_BASE_URL", "https://api.openai.com/v1"),
+        model_info={
+            "function_calling": True,
+            "max_tokens": 4096,
+            "context_length": 32768,
+            "vision": False,
+            "json_output": True,
+            "family": "deepseek",
+            "structured_output": True,
+        },
         # Responses 不接收 Chat Completions 的 name 字段，用文本前缀保留角色。
         include_name_in_message=False,
         add_name_prefixes=True,
         timeout=timeout if timeout is not None else float(os.getenv("AUTOGEN_PROXY_TIMEOUT", "180")) + 15,
         max_retries=0,
-        model_info={
-            "vision": False,
-            "function_calling": False,
-            "json_output": False,
-            "family": "unknown",
-            "structured_output": False,
-        },
     )
 
 
