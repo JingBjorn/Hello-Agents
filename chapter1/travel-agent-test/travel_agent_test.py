@@ -10,9 +10,9 @@ load_dotenv(Path(__file__).resolve().parent / "../../.env")
 
 # --- 1. 配置LLM客户端 ---
 # 请根据您使用的服务，将这里替换成对应的凭证和地址
-API_KEY = os.getenv("OPENAI_API_KEY")
-BASE_URL = os.getenv("OPENAI_BASE_URL")
-MODEL_ID = os.getenv("OPENAI_MODEL_NAME")
+API_KEY = os.getenv("LLM_API_KEY")
+BASE_URL = os.getenv("LLM_BASE_URL")
+MODEL_ID = os.getenv("LLM_MODEL_NAME")
 TAVILY_API_KEY=os.getenv("TAVILY_API_KEY")
 
 llm = OpenAICompatibleClient(

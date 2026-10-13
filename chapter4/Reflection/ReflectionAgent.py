@@ -1,6 +1,7 @@
 from chapter4.Reflection.systemPrompt import INITIAL_PROMPT_TEMPLATE, REFLECT_PROMPT_TEMPLATE, REFINE_PROMPT_TEMPLATE
 from chapter4.Reflection.memory import Memory
 from chapter4.llmClient import HelloAgentsLLM
+import json
 
 class ReflectionAgent:
     def __init__(self, llm_client, max_iterations=3):
@@ -31,8 +32,16 @@ class ReflectionAgent:
             feedback = self._get_llm_response(reflect_prompt)
             self.memory.add_record("reflection", feedback)
 
+            review = json.loads(feedback)
+            # validate_review(review)  # 校验必需字段、字段类型和 decision 枚举值
+
+            should_stop = (
+                review["decision"] == "STOP"
+                and review["improvements"] == []
+            )
+
             # b. 检查是否需要停止
-            if "无需改进" in feedback:
+            if should_stop:
                 print("\n✅ 反思认为代码已无需改进，任务完成。")
                 break
 

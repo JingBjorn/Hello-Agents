@@ -39,9 +39,9 @@ class HelloAgentsLLM:
             # 本地 Runtime 负责认证，不向它发送其他供应商的 API Key。
             self.client = None
         else:
-            self.model = model or os.getenv("OPENAI_MODEL_NAME")
-            apiKey = apiKey or os.getenv("OPENAI_API_KEY")
-            baseUrl = baseUrl or os.getenv("OPENAI_BASE_URL")
+            self.model = model or os.getenv("LLM_MODEL_NAME")
+            apiKey = apiKey or os.getenv("LLM_API_KEY")
+            baseUrl = baseUrl or os.getenv("LLM_BASE_URL")
 
             if not all([self.model, apiKey, baseUrl]):
                 raise ValueError("模型ID、API密钥和服务地址必须被提供或在.env文件中定义。")
