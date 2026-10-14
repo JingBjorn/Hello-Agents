@@ -1,0 +1,4 @@
+agentscope
+dashscope
+pydantic
+dotenv
